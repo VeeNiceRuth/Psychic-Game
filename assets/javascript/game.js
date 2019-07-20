@@ -3,7 +3,7 @@ var letterList = ['a', 'b', 'c','d','e','f','g','h','i','j','k','l','m','n','o',
 
 var winCounter = 0;
 var lossCounter= 0;
-var guessesLeft = 9;
+var guessesLeft = 0;
 
 //this is the letter that the computer prints randomly
 var chosenLetter = "";
@@ -17,9 +17,9 @@ function startGame() {
 
     //this will restart the guessesLeft to 9 
     guessesLeft = 9;
-
+    document.getElementById("guesses-left").innerHTML = guessesLeft;
     //this makes the computer choose randomy from the letterList array
-    var chosenLetter = letterList[Math.floor(Math.random() * letterList.length)];
+     chosenLetter = letterList[Math.floor(Math.random() * letterList.length)];
 
     //this logs  it to our consol.log for debugging, the user wont be able to see this
     console.log(chosenLetter + " letter to guess");
@@ -31,10 +31,13 @@ function roundComplete() {
     console.log("WinCounter: " + winCounter + " | LossCounter: " + lossCounter + " | GuessesLeft: " + guessesLeft);
     document.getElementById("guesses-left").innerHTML = guessesLeft;
  //if the letter guessed is the same as chosenLetter then it will increase the winCounter by 1, alert "you win!" and record it in the html
-  if (letterGuessed === chosenLetter) {
+  console.log(chosenLetter)
+ if (letterGuessed === chosenLetter) {
+ 
     winCounter++;
-    alert("you win!");
+  
     document.getElementById("win-counter").innerHTML = winCounter;
+    
     startGame();
   }
 // if their are no more guessesLeft is set to 0 then the lossCounter will increase by 1 alert "you lose" and record it in the loss counter in the html
@@ -54,7 +57,7 @@ startGame();
 //when the user presses a key and realeases it, it will log it into my console
 document.onkeyup = function(event) {
     letterGuessed = String.fromCharCode(event.which).toLowerCase();
-    console.log(letterGuessed);
+    //console.log(letterGuessed);
     guessesLeft--;
     roundComplete();
 
